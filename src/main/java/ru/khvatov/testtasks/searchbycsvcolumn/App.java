@@ -18,7 +18,7 @@ import ru.khvatov.testtasks.searchbycsvcolumn.search.impl.SearchExecutorImpl;
 import ru.khvatov.testtasks.searchbycsvcolumn.search.impl.SimplePrefixSearchDataStructureBuilder;
 import ru.khvatov.testtasks.searchbycsvcolumn.search.impl.SortedMapPrefixSearchDataStructure;
 import ru.khvatov.testtasks.searchbycsvcolumn.sort.DecimalDetector;
-import ru.khvatov.testtasks.searchbycsvcolumn.sort.impl.OnlyIfDecimalSorter;
+import ru.khvatov.testtasks.searchbycsvcolumn.sort.impl.OnlyIfDecimalWordsSorter;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +58,7 @@ public class App {
         final SearchExecutor searchExecutor = new SearchExecutorImpl(
                 searchStrings,
                 prefixSearchDataStructure,
-                new OnlyIfDecimalSorter(new DecimalDetector.Default()),
+                new OnlyIfDecimalWordsSorter(new DecimalDetector.Default()),
                 new Stopwatch.NanoTimeBasedStopwatch()
         );
 

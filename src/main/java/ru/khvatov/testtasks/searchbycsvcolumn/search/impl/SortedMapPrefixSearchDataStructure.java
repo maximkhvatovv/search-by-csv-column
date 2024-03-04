@@ -1,7 +1,7 @@
 package ru.khvatov.testtasks.searchbycsvcolumn.search.impl;
 
 import ru.khvatov.testtasks.searchbycsvcolumn.search.PrefixSearchDataStructure;
-import ru.khvatov.testtasks.searchbycsvcolumn.sort.Sorter;
+import ru.khvatov.testtasks.searchbycsvcolumn.sort.WordsSorter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,12 +35,12 @@ public class SortedMapPrefixSearchDataStructure implements PrefixSearchDataStruc
     }
 
     @Override
-    public List<Integer> findRowIdsByPrefix(final String prefix, final Sorter sorter) {
+    public List<Integer> findRowIdsByPrefix(final String prefix, final WordsSorter wordsSorter) {
         final String generalizedPrefix = generalizeFunc.apply(prefix);
         final List<String> result = new ArrayList<>(
                 wordToIds.subMap(generalizedPrefix, generalizedPrefix + Character.MAX_VALUE).keySet()
         );
-        return sorter.sort(result)
+        return wordsSorter.sort(result)
                 .stream()
                 .map(wordToIds::get)
                 .flatMap(Collection::stream)

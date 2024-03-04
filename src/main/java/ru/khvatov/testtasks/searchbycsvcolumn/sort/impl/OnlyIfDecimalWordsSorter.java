@@ -1,17 +1,17 @@
 package ru.khvatov.testtasks.searchbycsvcolumn.sort.impl;
 
 import ru.khvatov.testtasks.searchbycsvcolumn.sort.DecimalDetector;
-import ru.khvatov.testtasks.searchbycsvcolumn.sort.Sorter;
+import ru.khvatov.testtasks.searchbycsvcolumn.sort.WordsSorter;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class OnlyIfDecimalSorter implements Sorter {
+public class OnlyIfDecimalWordsSorter implements WordsSorter {
     private final DecimalDetector decimalDetector;
 
-    public OnlyIfDecimalSorter(final DecimalDetector decimalDetector) {
+    public OnlyIfDecimalWordsSorter(final DecimalDetector decimalDetector) {
         this.decimalDetector = decimalDetector;
     }
 

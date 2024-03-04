@@ -23,6 +23,8 @@ import ru.khvatov.testtasks.searchbycsvcolumn.sort.impl.OnlyIfDecimalSorter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static java.util.stream.Collectors.toList;
+
 public class App {
 
     public static void main(String[] args) {
@@ -48,11 +50,13 @@ public class App {
         final SearchStringsExtractor searchStringsExtractor = new DefaultSearchStringsExtractor(
                 params.getPathToFileWithStringsToSearchFor()
         );
+        final List<String> searchStrings = searchStringsExtractor.retrieveSearchStrings()
+                .collect(toList());
 
         final long initTime = initTimeStopwatch.getElapsedTime(TimeUnit.MILLISECONDS);
 
         final SearchExecutor searchExecutor = new SearchExecutorImpl(
-                searchStringsExtractor.retrieveSearchStrings(),
+                searchStrings,
                 prefixSearchDataStructure,
                 new OnlyIfDecimalSorter(new DecimalDetector.Default()),
                 new Stopwatch.NanoTimeBasedStopwatch()

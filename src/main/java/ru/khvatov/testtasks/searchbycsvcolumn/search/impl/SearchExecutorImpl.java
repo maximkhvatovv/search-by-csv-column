@@ -8,17 +8,16 @@ import ru.khvatov.testtasks.searchbycsvcolumn.sort.Sorter;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class SearchExecutorImpl implements SearchExecutor {
-    private final Stream<String> searchStrings;
+    private final List<String> searchStrings;
     private final PrefixSearchDataStructure prefixSearchDataStructure;
     private final Sorter sorter;
     private final Stopwatch stopwatch;
 
-    public SearchExecutorImpl(final Stream<String> searchStrings,
+    public SearchExecutorImpl(final List<String> searchStrings,
                               final PrefixSearchDataStructure prefixSearchDataStructure,
                               final Sorter sorter,
                               final Stopwatch stopwatch) {
@@ -30,7 +29,7 @@ public class SearchExecutorImpl implements SearchExecutor {
 
     @Override
     public List<SearchingResult.SubResult> performSearch() {
-        return searchStrings.map(searchString -> {
+        return searchStrings.stream().map(searchString -> {
                     stopwatch.start();
 
                     final List<Integer> searchedIds = prefixSearchDataStructure.findRowIdsByPrefix(
